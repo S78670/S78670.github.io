@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Bento Grid - Jerica Kwan Li Wen</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Rule 4: Color Palette & General Reset */
+        :root {
+            --color-background: #f8f9fa; /* Soft White/Light Grey */
+            --color-card-bg: #ffffff;    /* Pure White */
+            --color-text-primary: #212529; /* Dark Grey/Black */
+            --color-text-secondary: #6c757d; /* Soft Grey */
+            /* Custom Theme: Deep Ocean Blue Accent */
+            --color-accent: #004e92;     
+            --border-radius: 12px;
+            --spacing: 16px;
+        }
+
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: var(--spacing);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Bento Grid Layout (Desktop) - Rule 2: Grid Layout */
+        .bento-grid {
+            display: grid;
+            gap: var(--spacing);
+            grid-template-columns: repeat(4, 1fr); 
+            grid-auto-rows: minmax(120px, auto);
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: var(--color-card-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing) 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Typography & Headers */
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--color-accent);
+        }
+
+        p {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+        }
+
+        .meta-text {
+            color: var(--color-text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        /* Specific Card Styles (Sizing & Positioning) */
+
+        /* Card 1 (Profile): Large box (2x2) */
+        .card-profile {
+            grid-column: span 2;
+            grid-row: span 2;
+            justify-content: flex-start;
+            text-align: left;
+        }
+        .card-profile .profile-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin: 10px 0 5px 0;
+            color: var(--color-text-primary);
+        }
+        .tagline {
+            font-style: italic;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .card-profile .profile-detail {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+        .social-links a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+
+        /* Card 2 (Location): Small box (1x1) */
+        .card-location {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        /* Card 3 (Tech Stack): Medium box (1x1) */
+        .card-stack {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        .subject-list {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .subject-list li {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Card 4 (Case Study): Medium box (2x1) */
+        .card-casestudy {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        .casestudy-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-top: 5px;
+        }
+        .casestudy-description {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-top: 8px;
+        }
+
+        /* Card 5 (Hobby): Small box (1x1) */
+        .card-hobby {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        .hobby-description {
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* Card 6 (Playlist): Wide box (4x1) - Bottom row */
+        .card-playlist {
+            grid-column: 1 / -1;
+            grid-row: span 1;
+        }
+        .placeholder-player {
+            background-color: rgba(0, 78, 146, 0.1); /* Light accent background based on Ocean Blue */
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .placeholder-player p {
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        /* Rule 2: Responsive Design (Mobile Stacking) */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr; 
+                grid-auto-rows: auto;
+            }
+            .card {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+                padding: 20px;
+            }
+            .card-profile .profile-name {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bento-grid">
+
+            <div class="card card-profile">
+                <div>
+                    <p class="meta-text">Student Profile</p>
+                    <div class="profile-name">Jerica Kwan Li Wen</div>
+                    <div class="tagline">'No Fear, Just Clear.'</div>
+                    <div class="profile-detail">
+                        <p><strong>Program:</strong> Food Science</p>
+                        <p><strong>Year:</strong> Year 1</p>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">UMT Portal</a>
+                </div>
+            </div>
+
+            <div class="card card-location">
+                <h2>📍 Campus Location</h2>
+                <p class="meta-text">Universiti Malaysia Terengganu</p>
+                <p>Kuala Nerus, Terengganu</p>
+                <p>Current Time: **5:15 PM**</p>
+            </div>
+
+            <div class="card card-stack">
+                <h2>📚 Core Subjects</h2>
+                <p class="meta-text">First Year Foundation</p>
+                <ul class="subject-list">
+                    <li>Computer Science</li>
+                    <li>Biochem</li>
+                    <li>Organic Chem</li>
+                    <li>Physical Chem</li>
+                    <li>Engineering Math</li>
+                </ul>
+            </div>
+
+            <div class="card card-casestudy">
+                <h2>🔬 Research Interest</h2>
+                <p class="meta-text">Current Focus Area</p>
+                <p class="casestudy-title">Impact of GMO Soy Protein in Processed Meat Products</p>
+                <p class="casestudy-description">
+                    Evaluating the effects of genetically modified soy protein on texture, water-holding capacity and yield in sausages.
+                </p>
+            </div>
+
+            <div class="card card-hobby">
+                <h2>🧠 Off-Campus Activity</h2>
+                <p class="meta-text">Hobby</p>
+                <p class="hobby-description">Judging everyone including myself.</p>
+                <p style="font-size: 0.85rem; margin-top: 10px; color: var(--color-accent);">*A true connoisseur of critical observation.*</p>
+            </div>
+
+            <div class="card card-playlist">
+                <h2>🎧 Study Playlist</h2>
+                <p class="meta-text">Focus Music</p>
+                <div class
