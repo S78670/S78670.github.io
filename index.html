@@ -14,8 +14,7 @@
             --color-card-bg: #ffffff;    /* Pure White */
             --color-text-primary: #212529; /* Dark Grey/Black */
             --color-text-secondary: #6c757d; /* Soft Grey */
-            /* Custom Theme: Deep Ocean Blue Accent */
-            --color-accent: #004e92;     
+            --color-accent: #004e92;     /* Deep Ocean Blue Accent */
             --border-radius: 12px;
             --spacing: 16px;
         }
@@ -39,7 +38,7 @@
             margin: auto;
         }
 
-        /* Bento Grid Layout (Desktop) - Rule 2: Grid Layout */
+        /* Bento Grid Layout (Desktop) - Adjusted for new 7-card layout */
         .bento-grid {
             display: grid;
             gap: var(--spacing);
@@ -47,13 +46,13 @@
             grid-auto-rows: minmax(120px, auto);
         }
 
-        /* Card Styling */
+        /* Card Styling & Hover Tweak */
         .card {
             background-color: var(--color-card-bg);
             border-radius: var(--border-radius);
             padding: var(--spacing) 24px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.3s ease-in-out, box-shadow 0.2s; 
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -61,8 +60,8 @@
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transform: scale(1.02); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Typography & Headers */
@@ -87,34 +86,43 @@
             margin-bottom: 4px;
             font-weight: 500;
         }
-
-        /* Specific Card Styles (Sizing & Positioning) */
-
-        /* Card 1 (Profile): Large box (2x2) */
+        
+        /* Card 1 (Profile): Large box (2x2) - WITH BACKGROUND IMAGE */
         .card-profile {
             grid-column: span 2;
             grid-row: span 2;
             justify-content: flex-start;
             text-align: left;
+            /* --- BACKGROUND IMAGE CONFIGURATION --- */
+            background-image: url('bg.jpg'); 
+            background-size: cover;          
+            background-position: center;     
+            /* Setting a background-color with opacity for readability, blended with image */
+            background-color: rgba(255, 255, 255, 0.8); 
+            background-blend-mode: lighten; /* Use lighten to keep text readable over dark images */
+            /* Ensure text is clearly visible by forcing it to a darker color */
+            color: var(--color-text-primary); 
         }
+
         .card-profile .profile-name {
             font-size: 2.5rem;
             font-weight: 800;
             line-height: 1;
             margin: 10px 0 5px 0;
-            color: var(--color-text-primary);
+            color: var(--color-accent); /* Use accent color for main name */
         }
         .tagline {
             font-style: italic;
             font-weight: 600;
-            color: var(--color-accent);
+            color: var(--color-text-primary); /* Darker color for readability */
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
-        .card-profile .profile-detail {
+        .card-profile .profile-detail p {
             font-size: 1.1rem;
-            color: var(--color-text-secondary);
+            color: var(--color-text-primary); /* Darker color for readability */
         }
+        
         .social-links a {
             color: var(--color-accent);
             text-decoration: none;
@@ -126,84 +134,34 @@
             margin-top: 20px;
         }
 
-        /* Card 2 (Location): Small box (1x1) */
-        .card-location {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
+        /* Other Card Styles (Unchanged) */
 
-        /* Card 3 (Tech Stack): Medium box (1x1) */
-        .card-stack {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .subject-list {
-            margin: 8px 0 0 0;
-            padding-left: 20px;
-        }
-        .subject-list li {
-            font-size: 0.9rem;
-            color: var(--color-text-secondary);
-        }
-
-        /* Card 4 (Case Study): Medium box (2x1) */
-        .card-casestudy {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-        .casestudy-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-top: 5px;
-        }
-        .casestudy-description {
-            font-size: 0.9rem;
-            color: var(--color-text-secondary);
-            margin-top: 8px;
-        }
-
-        /* Card 5 (Hobby): Small box (1x1) */
-        .card-hobby {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .hobby-description {
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        /* Card 6 (Playlist): Wide box (4x1) - Bottom row */
-        .card-playlist {
-            grid-column: 1 / -1;
-            grid-row: span 1;
-        }
-        .placeholder-player {
-            background-color: rgba(0, 78, 146, 0.1); /* Light accent background based on Ocean Blue */
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .placeholder-player p {
-            font-weight: 600;
-            color: var(--color-accent);
-        }
+        .card-location { grid-column: span 1; grid-row: span 1; }
+        .card-stack { grid-column: span 1; grid-row: span 1; }
+        .subject-list { margin: 8px 0 0 0; padding-left: 20px; }
+        .subject-list li { font-size: 0.9rem; color: var(--color-text-secondary); }
+        .card-casestudy { grid-column: span 2; grid-row: span 1; }
+        .casestudy-title { font-size: 1.1rem; font-weight: 600; color: var(--color-text-primary); margin-top: 5px; }
+        .casestudy-description { font-size: 0.9rem; color: var(--color-text-secondary); margin-top: 8px; }
+        .card-hobby { grid-column: 3 / 4; grid-row: 2 / 3; }
+        .hobby-description { font-style: italic; font-weight: 500; }
+        .card-reflection { grid-column: 4 / 5; grid-row: 2 / 3; }
+        .reflection-content { font-size: 0.95rem; line-height: 1.5; margin-top: 5px; }
+        .card-playlist { grid-column: 1 / -1; grid-row: 3 / 4; }
+        .placeholder-player { background-color: rgba(0, 78, 146, 0.1); padding: 15px; border-radius: 8px; text-align: center; margin-top: 10px; }
+        .placeholder-player p { font-weight: 600; color: var(--color-accent); }
 
         /* Rule 2: Responsive Design (Mobile Stacking) */
         @media (max-width: 768px) {
-            .bento-grid {
-                grid-template-columns: 1fr; 
-                grid-auto-rows: auto;
+            .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .card { grid-column: span 1 !important; grid-row: span 1 !important; padding: 20px; }
+            .card-profile { 
+                /* Remove blend mode on mobile for simplicity */
+                background-blend-mode: normal;
+                background-color: var(--color-card-bg); /* Use pure white base */
             }
-            .card {
-                grid-column: span 1 !important;
-                grid-row: span 1 !important;
-                padding: 20px;
-            }
-            .card-profile .profile-name {
-                font-size: 2rem;
-            }
+            .card-profile .profile-name { font-size: 2rem; }
+            .card-playlist { order: 7; }
         }
     </style>
 </head>
@@ -232,7 +190,7 @@
                 <h2>📍 Campus Location</h2>
                 <p class="meta-text">Universiti Malaysia Terengganu</p>
                 <p>Kuala Nerus, Terengganu</p>
-                <p>Current Time: **5:15 PM**</p>
+                <p>Current Time: **6:01 PM**</p>
             </div>
 
             <div class="card card-stack">
@@ -263,7 +221,24 @@
                 <p style="font-size: 0.85rem; margin-top: 10px; color: var(--color-accent);">*A true connoisseur of critical observation.*</p>
             </div>
 
+            <div class="card card-reflection">
+                <h2>💡 Why Food Tech Matters in Malaysia</h2>
+                <p class="meta-text">Reflection</p>
+                <p class="reflection-content">
+                    Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.
+                </p>
+            </div>
+
             <div class="card card-playlist">
                 <h2>🎧 Study Playlist</h2>
                 <p class="meta-text">Focus Music</p>
-                <div class
+                <div class="placeholder-player">
+                    <p>🎶 Placeholder for Embedded Music Player / YouTube Music Link</p><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO3LL0aN?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <p style="font-size: 0.8rem;">**Now Playing:** Deep House & Ambient Tracks for Sustained Focus</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
