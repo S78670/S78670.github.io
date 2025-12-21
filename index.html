@@ -29,7 +29,8 @@
             padding: var(--spacing);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Changed to column to accommodate the button below or inside */
+            align-items: center;
         }
 
         .container {
@@ -135,7 +136,6 @@
         }
 
         /* Other Card Styles (Unchanged) */
-
         .card-location { grid-column: span 1; grid-row: span 1; }
         .card-stack { grid-column: span 1; grid-row: span 1; }
         .subject-list { margin: 8px 0 0 0; padding-left: 20px; }
@@ -156,17 +156,72 @@
             .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
             .card { grid-column: span 1 !important; grid-row: span 1 !important; padding: 20px; }
             .card-profile { 
-                /* Remove blend mode on mobile for simplicity */
                 background-blend-mode: normal;
                 background-color: var(--color-card-bg); /* Use pure white base */
             }
             .card-profile .profile-name { font-size: 2rem; }
             .card-playlist { order: 7; }
         }
+
+        /* Styling for the jump-link on your main portfolio */
+        .app-access-container {
+            margin: 20px;
+            display: inline-block;
+        }
+
+        .timer-app-link {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 2px solid #0d47a1;
+            border-radius: 12px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #263238;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .timer-icon {
+            font-size: 2rem;
+            margin-right: 12px;
+        }
+
+        .timer-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .timer-text strong {
+            color: #0d47a1;
+            font-size: 1rem;
+        }
+
+        .timer-text span {
+            font-size: 0.75rem;
+            color: #555;
+        }
+
+        .timer-app-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(13, 71, 161, 0.2);
+            background-color: #f8faff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="app-access-container">
+            <a href="https://s78670.github.io/lab-timer-app/" class="timer-app-link">
+                <div class="timer-icon">🔬</div>
+                <div class="timer-text">
+                    <strong>Lab Timer</strong>
+                    <span>Launch App</span>
+                </div>
+            </a>
+        </div>
+
         <div class="bento-grid">
 
             <div class="card card-profile">
@@ -233,7 +288,8 @@
                 <h2>🎧 Study Playlist</h2>
                 <p class="meta-text">Focus Music</p>
                 <div class="placeholder-player">
-                    <p>🎶 Placeholder for Embedded Music Player / YouTube Music Link</p><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO3LL0aN?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <p>🎶 Placeholder for Embedded Music Player / YouTube Music Link</p>
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO3LL0aN?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                     <p style="font-size: 0.8rem;">**Now Playing:** Deep House & Ambient Tracks for Sustained Focus</p>
                 </div>
             </div>
